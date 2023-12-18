@@ -44,14 +44,14 @@ void AddNewStudentToLinkedList(){
     printf("Please enter the student age: \n");
     scanf("%d", &age);
 
-    //create student
+    //create student (Edit: Egentligen kanske man borde skapa en "student nyStudent; nyStudent.Age = age; [...]" men jag kunde inte sätta data på noden på det sättet... ;/ )
     linkedList *nodeToAddToLinkedList = malloc(sizeof(linkedList));
     nodeToAddToLinkedList->data.Age = age;
     nodeToAddToLinkedList->data.Name = name;
 
     //add student to end of list
     //min pointer börjar på head, och går till sista noden. 
-    //Sen får jag den sista nodens Next att peka på vår nya student
+    //Sen får jag den sista nodens Next att peka på vår nya student-nod
     linkedList *listTraversingPointer = head;
     while(listTraversingPointer->Next != NULL){
         listTraversingPointer = listTraversingPointer->Next;
@@ -60,16 +60,17 @@ void AddNewStudentToLinkedList(){
     nodeToAddToLinkedList->Next = NULL;
 
     //vill vi istället att studenten ska läggas in i början
-    // studentToAdd->Next = head->Next. Sedan 
-    // head->Next = studentToAdd
+    // nodeToAddToLinkedList->Next = head->Next. Sedan 
+    // head->Next = nodeToAddToLinkedList
     // Alltså, det som head pekar på nu, ska student istället peka på. Sen flytta om så att head pekar på student
 
     //Att lägga studenten i början är mer effektivt. Om vi lägger student i end of list, kommer vi behöva traversera alla noder till slutet innan vi lägger till något.
-    //Det skalar dåligt. Ju fler studenter, desto dyrare operation. Om inte vi lägger till en tail pointer på slutet av listan.
+    //Det skalar dåligt. Ju fler studenter, desto dyrare operation. Såvida vi inte lägger till en tail pointer på slutet av listan, då kan man fylla på där bak istället.
 
     printf("\n\nStudent: %s, aged %d, has successfully been added", name, age);
 };
 
+//Vår meny
 int InitMenu(){
     int selectedUserOption = -1;
     printf("\n\n---------------\nWelcome to MyBlackboard!\n---------------\n\nWhat do you wish to do?\n1. Add a new student\n2. View Student database\n\n---------------\n0. Exit program\n---------------\n\n");
@@ -77,6 +78,7 @@ int InitMenu(){
     return selectedUserOption;
 }
 
+//Skriver ut en text för att fylla konsolen på ett snyggt sätt;
 void PrintFunctionHeaderText(char *functionName){
     printf("|||---------------|||\n");
     printf("---------%s-------\n", functionName);
