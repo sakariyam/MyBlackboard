@@ -1,7 +1,7 @@
 #include<stdio.h> 
 #include<stdlib.h>
 
-typedef struct Program{
+typedef struct Program{//Vad vill hab med den här
     char *Name;
     char *Responsible;
     char *ResponsibleEmail;
@@ -18,6 +18,7 @@ typedef struct LinkedList{
     struct LinkedList *Next; //Nästa nod i vår list struct
 } linkedList;
 
+//head behöver vara en global pekare så att vi alltid kan nå början på listan i alla våra funktioner. :^D
 linkedList *head;
 
 void PrintStudentLinkedList() {
@@ -26,7 +27,7 @@ void PrintStudentLinkedList() {
     p = p->Next;//Börja på första noden.
     while (p != NULL) {
         numOfStudents++;
-        printf("%d. Age of student: %d\n", numOfStudents, p->data.Age);//Jag kan inte få namnet att sparas rätt i det här bajs språket. printer ålder istället
+        printf("%d. Age of student: %d\n", numOfStudents, p->data.Age);//Jag kan inte få namnet att sparas rätt i det här bajs språket. printar ålder istället
         p = p->Next;
     }
 
